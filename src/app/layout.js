@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Create Next App",
+  title: "Love for ThreeJs",
   description: "ThreeJs Daily Learning",
 };
 
