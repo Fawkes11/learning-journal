@@ -12,6 +12,82 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@theme { 
+  --color-matcha-50: '#f4f6f3';
+  --color-matcha-100: '#e6eae1';
+  --color-matcha-200: '#cdd6c4';
+  --color-matcha-300: '#a9b99c';
+  --color-matcha-400: '#809671';  /* color lock / color base */
+  --color-matcha-500: '#607851';
+  --color-matcha-600: '#485e3d';
+  --color-matcha-700: '#394b31';
+  --color-matcha-800: '#2f3d28';
+  --color-matcha-900: '#273222';
+  --color-matcha-950: '#141c12';
+
+  --color-almond-50: '#f8f6f4';
+  --color-almond-100: '#eeece6';
+  --color-almond-200: '#e5e0d8'; /* color lock / color base */
+  --color-almond-300: '#c7bbaa';
+  --color-almond-400: '#af9d88';
+  --color-almond-500: '#9f8770';
+  --color-almond-600: '#927864';
+  --color-almond-700: '#7a6254';
+  --color-almond-800: '#645148';
+  --color-almond-900: '#52443c';
+  --color-almond-950: '#2b231f';
+
+
+  --color-pistache-50: '#f7f7f3';
+  --color-pistache-100: '#e6e8dd';
+  --color-pistache-200: '#ccd0b7';
+  --color-pistache-300: '#b3b792'; /* color lock / color base */
+  --color-pistache-400: '#a3a679';
+  --color-pistache-500: '#999767';
+  --color-pistache-600: '#868059';
+  --color-pistache-700: '#71694c';
+  --color-pistache-800: '#5e5742';
+  --color-pistache-900: '#4f4838';
+  --color-pistache-950: '#2b271d';
+
+  --color-chai-50: '#faf7f2';
+  --color-chai-100: '#f4ece0';
+  --color-chai-200: '#e9d8bf';
+  --color-chai-300: '#dbbe96';
+  --color-chai-400: '#d2ab80'; /* color lock / color base */
+  --color-chai-500: '#c0854f';
+  --color-chai-600: '#b27244';
+  --color-chai-700: '#945b3a';
+  --color-chai-800: '#784a34';
+  --color-chai-900: '#613e2d';
+  --color-chai-950: '#341f16';
+
+  --color-carob-50: '#f7f5ef';
+  --color-carob-100: '#ebe6d6';
+  --color-carob-200: '#d9cdaf';
+  --color-carob-300: '#c2ae82';
+  --color-carob-400: '#b0935f';
+  --color-carob-500: '#a18151';
+  --color-carob-600: '#8a6844';
+  --color-carob-700: '#72523a'; /* color lock / color base */
+  --color-carob-800: '#5f4434';
+  --color-carob-900: '#523c31';
+  --color-carob-950: '#2f1f19';
+
+  --color-vanilla-50: '#faf6f2';
+  --color-vanilla-100: '#f4ebe0';
+  --color-vanilla-200: '#e5d2bb'; /* color lock / color base */
+  --color-vanilla-300: '#d8ba99';
+  --color-vanilla-400: '#c79870';
+  --color-vanilla-500: '#bb7f54';
+  --color-vanilla-600: '#ae6c48';
+  --color-vanilla-700: '#91573d';
+  --color-vanilla-800: '#754737';
+  --color-vanilla-900: '#5f3c2f';
+  --color-vanilla-950: '#331d17';
+
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
