@@ -1,5 +1,6 @@
 "use client"
 import gsap from "gsap";
+import Link from "next/link";
 import { useState, useEffect, useRef, forwardRef } from "react"
 
 
@@ -41,7 +42,7 @@ const SideBar = () => {
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
             // Eliminamos la clase hover de Tailwind para que no interfiera con GSAP
-            className="flex h-10 w-64 bg-gray-100/[.4] items-center justify-center absolute left-8 px-4 rounded-b-xl"
+            className="flex h-10 w-64 bg-gray-100/[.4] items-center justify-center absolute left-8 px-4 z-50 rounded-b-xl"
         >
             <div className="flex-1">
                 <CustomSelect setIsHover={setIsHover} ref={inputSelect} />
@@ -60,60 +61,70 @@ const CustomSelect = forwardRef(({
         {
             id: 1,
             name: 'Day 1',
+            href: '/day-1',
             avatar:
                 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
         },
         {
             id: 2,
             name: 'Day 2',
+            href: '/day-1',
             avatar:
                 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
         },
         {
             id: 3,
             name: 'Day 3',
+            href: '/day-1',
             avatar:
                 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80',
         },
         {
             id: 4,
             name: 'Day 4',
+            href: '/day-1',
             avatar:
                 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
         },
         {
             id: 5,
             name: 'Day 5',
+            href: '/day-1',
             avatar:
                 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
         },
         {
             id: 6,
             name: 'Day 6',
+            href: '/day-1',
             avatar:
                 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
         },
         {
             id: 7,
             name: 'Day 7',
+            href: '/day-1',
             avatar:
                 'https://images.unsplash.com/photo-1568409938619-12e139227838?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
         },
         {
             id: 8,
             name: 'Day 8',
+            href: '/day-1',
             avatar:
                 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
         },
         {
             id: 9,
             name: 'Day 9',
+            href: '/day-1',
             avatar:
                 'https://images.unsplash.com/photo-1584486520270-19eca1efcce5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
         },
         {
             id: 10,
             name: 'Day 10',
+            href: '/day-1',
             avatar:
                 'https://images.unsplash.com/photo-1561505457-3bcad021f8ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
         },
@@ -176,10 +187,10 @@ const CustomSelect = forwardRef(({
                                 onClick={() => handleSelect(day)}
                                 role="option"
                             >
-                                <div className="flex items-center">
+                                <Link href={day.href} className="flex items-center">
                                     <img src={day.avatar} alt={day.name} className="h-6 w-6 rounded-full" />
                                     <span className="ml-3 block truncate">{day.name}</span>
-                                </div>
+                                </Link>
                                 {selected.id === day.id && (
                                     <span className="absolute inset-y-0 right-0 flex items-center pr-4">
                                         <svg
