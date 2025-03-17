@@ -251,8 +251,8 @@ void main()
 	fullScreenState.y *= uResolution.y/uQuadSize.y;
 
     float cornersProgress = mix(
-        mix(uCorners.z, uCorners.w, uv.y),
-        mix(uCorners.x, uCorners.y, uv.y),
+        mix(uCorners.w, uCorners.y, uv.x),
+        mix(uCorners.z, uCorners.x, uv.x),
         uv.y
     );
 
