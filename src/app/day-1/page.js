@@ -1,4 +1,5 @@
 'use client'
+import ASScroll from '@ashthornton/asscroll';
 import gsap from 'gsap';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
@@ -9,10 +10,22 @@ import { Pane } from 'tweakpane';
 
 const Day_1 = () => {
     const canvasRef = useRef(null);
+    const scrollContainer = useRef(null);
 
     useEffect(() => {
         // Referencia al canvas
         const canvas = canvasRef.current;
+
+        let asscroll = null;
+
+        asscroll = new ASScroll({
+            disableRaf: true, // Desactiva el requestAnimationFrame interno para usar el de Three.js
+        });
+        asscroll.enable({
+            horizontalScroll: true, // Activa scroll horizontal, ya que tienes un slider horizontal
+        });
+
+
 
         //new TWEAKPANE control
         const pane = new Pane();
@@ -40,6 +53,7 @@ const Day_1 = () => {
         let basePlaneGeometry = new THREE.PlaneGeometry(300, 300, 100, 100);
         let loader = new THREE.TextureLoader();
         let textureSampler = loader.load('/img/uvMap.png')
+        // let textureSampler = loader.load('/img/landscape_01.jpeg')
         let basePlaneMaterial = new THREE.ShaderMaterial({
             uniforms: {
                 time: { value: 0.0 },
@@ -57,7 +71,6 @@ const Day_1 = () => {
         })
         const basePlaneMesh = new THREE.Mesh(basePlaneGeometry, basePlaneMaterial);
         basePlaneMesh.position.x = 300;
-        basePlaneMesh.rotation.z = Math.PI / 4
         scene.add(basePlaneMesh);
 
 
@@ -82,8 +95,8 @@ const Day_1 = () => {
 
 
         /**
-     * LIGHTS
-     */
+        * LIGHTS
+        */
 
 
 
@@ -92,8 +105,8 @@ const Day_1 = () => {
         scene.add(ambientLight);
 
         /**
- * ORBIT CONTROLS
- */
+         * ORBIT CONTROLS
+         */
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.update();
 
@@ -111,6 +124,7 @@ const Day_1 = () => {
             timeline.progress(params.progress)
 
 
+            asscroll.update();
 
             // Renderizar la escena
             renderer.render(scene, camera);
@@ -157,13 +171,14 @@ const Day_1 = () => {
             // Destruir el canvas y limpiar la escena
             renderer.dispose();
             window.removeEventListener('resize', onWindowResize)
+            asscroll.disable();
         };
     }, []);
 
     return (
-        <div className="w-full h-screen flex items-center justify-center overflow-hidden">
+        <div className="w-full h-screen flex items-center justify-center">
             <canvas ref={canvasRef} className='w-full h-full absolute left-0 top-0 -z-10' />
-            {/* <div className='w-[1000px] h-96 flex items-center overflow-x-auto'>
+            <div asscroll-container="true" className=' w-[1000px] h-96 flex items-center'>
                 <div className='flex flex-row pl-16'>
                     {
                         ['/img/uvMap.png', '/img/uvMap.png', '/img/uvMap.png', '/img/uvMap.png', '/img/uvMap.png', '/img/uvMap.png', '/img/uvMap.png', '/img/uvMap.png', '/img/uvMap.png'].map((item, index) => (
@@ -171,7 +186,7 @@ const Day_1 = () => {
                                 key={index}
                                 className='w-48 mr-16 h-72 cursor-pointer group bg-neutral-400 flex flex-col items-center py-3 rounded-lg'>
                                 <div className='w-44 h-44 mb-2 relative outline-1 outline-offset-4 outline-transparent group-hover:outline-matcha-950 outline-dotted rounded overflow-hidden'>
-                                    <Image fill src={item} className='' alt='example slider image' />
+                                    <Image src={item} width={1024} height={1024} className='' alt='example slider image' priority />
                                 </div>
                                 <div className='w-full px-2'>
                                     <h2 className='font-semibold text-lg'>Esta es la imagen numero {index}</h2>
@@ -181,7 +196,7 @@ const Day_1 = () => {
                         ))
                     }
                 </div>
-            </div> */}
+            </div>
         </div>
 
     );
@@ -243,7 +258,11 @@ varying vec2 vUv;
 
 void main()
 {
+
+    float PI = 3.1415926;
 	vUv = uv;
+    float sine = sin(PI * uProgress);
+    float waves = sine *0.1 * sin(5. * length(uv) + 15. * uProgress);
 
 	vec4 defaultState = modelMatrix * vec4( position,1.0 );
 	vec4 fullScreenState =  vec4( position,1.0 ) ;
@@ -256,9 +275,9 @@ void main()
         uv.y
     );
 
-	vec4 newState = mix(defaultState, fullScreenState, cornersProgress);
+	vec4 newState = mix(defaultState, fullScreenState, uProgress + waves);
 
-	vSize = mix(uQuadSize, uResolution, cornersProgress);
+	vSize = mix(uQuadSize, uResolution, uProgress);
 
 	gl_Position = projectionMatrix * viewMatrix * newState ;
 
